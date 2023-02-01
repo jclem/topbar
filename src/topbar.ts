@@ -7,6 +7,7 @@
 
 const canvas: HTMLCanvasElement = document.createElement('canvas')
 
+let delayTimerId: number | undefined = undefined
 let progressTimerId: number | undefined = undefined
 let fadeTimerId: number | undefined = undefined
 let currentProgress = 0
@@ -102,6 +103,12 @@ export const topbar = {
     }
   },
 
+  delayedShow(delay: number) {
+    if (showing) return
+    if (delayTimerId != null) return
+    delayTimerId = setTimeout(() => topbar.show(), delay)
+  },
+
   progress(to: number | string | undefined): number {
     if (typeof to === 'undefined') return currentProgress
     if (typeof to === 'string') {
@@ -115,6 +122,9 @@ export const topbar = {
   },
 
   hide() {
+    clearTimeout(delayTimerId)
+    delayTimerId = undefined
+
     if (!showing) return
     showing = false
     if (progressTimerId != null) {
