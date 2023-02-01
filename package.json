@@ -1,19 +1,37 @@
 {
-  "name": "topbar",
-  "main": "topbar.min.js",
-  "files": [
-    "topbar.js",
-    "topbar.min.js"
-  ],
-  "version": "1.0.1",
+  "name": "@jclem/topbar",
   "description": "Tiny & beautiful site-wide progress indicator",
-  "homepage": "http://buunguyen.github.io/topbar",
+  "version": "1.0.1",
+  "author": "Jonathan Clem <j@jclem.me> (https://www.jclem.me)",
+  "bugs": "http://github.com/jclem/topbar",
+  "type": "module",
+  "types": "./dist/esm/topbar.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/topbar.d.ts",
+      "import": "./dist/esm/topbar.js",
+      "require": "./dist/cjs/topbar.js"
+    }
+  },
+  "files": [
+    "dist/*",
+    "README.md",
+    "LICENSE.md",
+    "package.json"
+  ],
+  "homepage": "https://github.com/jclem/topbar/#readme",
   "repository": {
     "type": "git",
-    "url": "git@github.com:buunguyen/topbar.git"
+    "url": "git@github.com:jclem/topbar.git"
   },
   "scripts": {
-    "build": "uglifyjs --comments -c -o topbar.min.js topbar.js"
+    "build": "if [ -d dist ]; then rm -r dist; fi && konk run c -gL -n'build:*'",
+    "build:esm": "tsc -p tsconfig.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "check": "konk run c -cgL -n 'check:*'",
+    "check:format": "prettier --check .",
+    "fix": "konk run s -cL -n 'fix:*'",
+    "fix:format": "prettier --list-different --write ."
   },
   "keywords": [
     "progress",
@@ -23,10 +41,9 @@
     "loading"
   ],
   "license": "MIT",
-  "author": {
-    "name": "Buu Nguyen"
-  },
   "devDependencies": {
-    "uglify-js": "~3.12.4"
+    "konk": "^0.27.1",
+    "prettier": "^2.8.3",
+    "typescript": "^4.9.5"
   }
 }
