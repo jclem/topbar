@@ -1,7 +1,7 @@
 {
   "name": "@jclem/topbar",
   "description": "Tiny & beautiful site-wide progress indicator",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "Jonathan Clem <j@jclem.me> (https://www.jclem.me)",
   "bugs": "http://github.com/jclem/topbar",
   "type": "module",
